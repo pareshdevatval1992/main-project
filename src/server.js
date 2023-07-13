@@ -10,6 +10,6 @@ connectDB();
 allRoutes(app); //initiate routes
 
 
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
     console.log(`Server is working on http://localhost:${port}`);
   });

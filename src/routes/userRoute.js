@@ -2,7 +2,7 @@ const express = require('express');
 const userModel = require('../submodels/userModel');
 
 const router = new express.Router();
-
+console.log("in user route");
 router.get("/", async (req, res) => {
     console.log(req.body);
     
