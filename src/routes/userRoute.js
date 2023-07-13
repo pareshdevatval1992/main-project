@@ -22,8 +22,9 @@ router.post('/', async (req, res) => {
         console.log(existUser)
         if(!existUser){
             const user = new userModel(req.body);
-            const createUSer = await user.save();
-            res.status(201).send(createUSer);
+            const createUser = await user.save();
+            console.log(createUser);
+            res.status(201).send(createUser);
         }else{
             res.status(400).send({"message":"User already exists"})
         }
