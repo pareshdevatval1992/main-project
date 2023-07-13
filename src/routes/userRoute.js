@@ -1,5 +1,5 @@
 const express = require('express');
-// const userModel = require('../models/userModel');
+const userModel = require('../submodels/userModel');
 
 const router = new express.Router();
 
@@ -7,9 +7,9 @@ router.get("/", async (req, res) => {
     console.log(req.body);
     
     try{
-        // const users = await userModel.find();
-        // console.log(users);
-        res.status(201).send("Success");
+        const users = await userModel.find();
+        console.log(users);
+        res.status(201).send(users);
 
     }catch(e){ res.status(400).send(e)} 
 });
@@ -18,15 +18,15 @@ router.get("/", async (req, res) => {
 router.post('/', async (req, res) => {
     console.log("in create",req.body);
     try{
-        // const existUser = await userModel.findOne({ email:req.body.email})
-        // console.log(existUser)
-        // if(!existUser){
-        //     const user = new userModel(req.body);
-        //     const createUSer = await user.save();
-            res.status(201).send("success");
-        // }else{
-        //     res.status(400).send({"message":"User already exists"})
-        // }
+        const existUser = await userModel.findOne({ email:req.body.email})
+        console.log(existUser)
+        if(!existUser){
+            const user = new userModel(req.body);
+            const createUSer = await user.save();
+            res.status(201).send(createUSer);
+        }else{
+            res.status(400).send({"message":"User already exists"})
+        }
     }catch(e){ 
         console.log(e);
         res.status(400).send(e)
